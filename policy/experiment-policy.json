@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "default_environment": "isolated",
+  "production_experiments": false,
+  "require_hypothesis": true,
+  "require_baseline": true,
+  "require_success_metric": true,
+  "require_stop_condition": true,
+  "require_rollback": true,
+  "require_data_classification": true,
+  "require_owner_approval": true,
+  "max_parallel_experiments": 2,
+  "max_duration_minutes": 30,
+  "max_external_cost_usd": 0,
+  "prohibited": [
+    "live_malware", "production_chaos", "unbounded_fuzzing", "private_data_upload",
+    "automatic_release", "automatic_merge", "unreviewed_security_claim"
+  ]
+}
