@@ -23,6 +23,9 @@ class CatalogValidationTests(unittest.TestCase):
             (root / "catalog/diagnostic-playbooks.json").write_text(
                 json.dumps({"playbooks": [playbook, playbook]}), encoding="utf-8"
             )
+            (root / "catalog/detection-layers.json").write_text(json.dumps({
+                "layers": [{"id": f"L{number}"} for number in range(8)]
+            }), encoding="utf-8")
             (root / "policy/fleet-policy.json").write_text(json.dumps({
                 "default_mode": "read_only",
                 "repair_mode": "draft_pull_request_only",
