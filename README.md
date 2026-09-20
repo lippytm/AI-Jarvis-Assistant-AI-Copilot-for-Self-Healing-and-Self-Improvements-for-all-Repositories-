@@ -30,4 +30,7 @@ merge → monitor → learn.
 - `catalog/security-controls.json` defines layered vulnerability-prevention and recovery controls.
 - `policy/incident-state-machine.json` makes security finding status changes auditable.
 - `docs/SECURITY_RESILIENCE.md` defines evidence required before high-impact findings close.
+- `catalog/anti-malware-controls.json` defines endpoint, repository, supply-chain, behavioral, containment, and recovery defenses.
+- `policy/suspicious-artifact-state-machine.json` keeps unknown files isolated until evidence supports a decision.
+- `docs/ANTI_MALWARE_DEFENSE.md` defines safe sample handling and ransomware resilience.
 - Development stays on review branches; `main` remains the approved baseline.
