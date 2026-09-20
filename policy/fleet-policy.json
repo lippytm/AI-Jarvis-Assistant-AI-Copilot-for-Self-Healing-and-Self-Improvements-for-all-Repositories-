@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "owner": "lippytm",
+  "max_repositories_per_cycle": 100,
+  "max_parallel_diagnostics": 5,
+  "max_repairs_per_cycle": 3,
+  "max_retry_count": 2,
+  "default_mode": "read_only",
+  "repair_mode": "draft_pull_request_only",
+  "require_reproducer": true,
+  "require_tests": true,
+  "require_rollback": true,
+  "require_owner_approval": true,
+  "prohibited": [
+    "force_push", "direct_default_branch_write", "automatic_merge", "automatic_deploy",
+    "secret_rotation", "data_deletion", "external_messaging", "spending"
+  ]
+}

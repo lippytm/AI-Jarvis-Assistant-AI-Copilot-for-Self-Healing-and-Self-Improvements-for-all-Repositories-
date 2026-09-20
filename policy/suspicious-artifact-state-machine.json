@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "states": [
+    {"state": "untrusted", "actions": ["hash", "record_source", "isolate"], "next": ["scanning"]},
+    {"state": "scanning", "actions": ["static_scan", "metadata_analysis", "sandbox_if_authorized"], "next": ["suspicious", "provisionally_clear", "unknown"]},
+    {"state": "suspicious", "actions": ["quarantine", "preserve_evidence", "notify_authorized_owner"], "next": ["confirmed_malicious", "false_positive", "unknown"]},
+    {"state": "confirmed_malicious", "actions": ["contain", "authorized_revocation", "eradication_plan", "recovery_plan"], "next": ["recovering"]},
+    {"state": "recovering", "actions": ["restore", "verify", "monitor"], "next": ["resolved", "reopened"]},
+    {"state": "provisionally_clear", "actions": ["restrict_execution", "monitor", "retain_scan_evidence"], "next": ["reopened"]},
+    {"state": "unknown", "actions": ["keep_isolated", "seek_independent_analysis"], "next": ["scanning", "suspicious", "provisionally_clear"]},
+    {"state": "false_positive", "actions": ["document", "narrow_tuning", "regression_test"], "next": ["reopened"]},
+    {"state": "resolved", "actions": ["lessons_learned", "control_update", "follow_up_scan"], "next": ["reopened"]}
+  ],
+  "default_for_disagreement": "unknown",
+  "default_for_missing_evidence": "untrusted",
+  "production_authority": "owner_or_incident_commander_approval_required"
+}

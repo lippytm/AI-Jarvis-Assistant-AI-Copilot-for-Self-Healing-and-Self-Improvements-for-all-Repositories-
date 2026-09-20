@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "rule": "Detect first; never install or execute a tool solely because a filename resembles a language.",
+  "playbooks": [
+    {"id": "python", "signals": ["pyproject.toml", "requirements.txt", "setup.py"], "diagnostics": ["configured unit tests", "compileall", "configured formatter/linter", "configured type checker", "dependency vulnerability review"], "repair_gate": "Tests reproduce the defect and pass after the smallest patch."},
+    {"id": "javascript-typescript", "signals": ["package.json"], "diagnostics": ["lockfile-consistent install", "configured test script", "configured lint script", "configured typecheck/build script", "dependency vulnerability review"], "repair_gate": "Existing package scripts pass without silently changing the lockfile."},
+    {"id": "go", "signals": ["go.mod"], "diagnostics": ["go test ./...", "go vet ./...", "module verification"], "repair_gate": "Tests and vet pass with a minimal module diff."},
+    {"id": "rust", "signals": ["Cargo.toml"], "diagnostics": ["cargo test", "configured clippy policy", "dependency advisory review"], "repair_gate": "Tests pass and warnings do not increase."},
+    {"id": "github-actions", "signals": [".github/workflows"], "diagnostics": ["YAML parse", "action reference review", "least-privilege permissions", "timeout and concurrency review"], "repair_gate": "Workflow syntax and representative dry-run checks pass."},
+    {"id": "web", "signals": ["index.html", "next.config.js", "gatsby-config.js", "vite.config.js"], "diagnostics": ["build", "link and route checks", "accessibility checks", "security headers review", "performance budget"], "repair_gate": "Preview build passes with no critical regression."},
+    {"id": "unclassified", "signals": [], "diagnostics": ["inventory files", "identify build contract", "identify owner and intended runtime"], "repair_gate": "Do not auto-repair until the repository contract is documented."}
+  ],
+  "cross_cutting": [
+    "secret scanning", "license review", "dependency provenance", "test isolation",
+    "data classification", "rollback evidence", "artifact hashes", "owner approval"
+  ]
+}

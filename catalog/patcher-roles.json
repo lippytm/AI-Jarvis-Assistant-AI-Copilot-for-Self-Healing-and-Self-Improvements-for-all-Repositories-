@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "roles": [
+    {"id": "reproducer", "purpose": "Convert a report into deterministic failing evidence", "may_write_code": false, "may_approve": false},
+    {"id": "root_cause_analyst", "purpose": "Compare competing causal hypotheses against evidence", "may_write_code": false, "may_approve": false},
+    {"id": "patch_author", "purpose": "Prepare the smallest repair on an isolated branch", "may_write_code": true, "may_approve": false},
+    {"id": "adversarial_reviewer", "purpose": "Find regressions, hidden assumptions, and unsafe scope expansion", "may_write_code": false, "may_approve": false},
+    {"id": "regression_verifier", "purpose": "Run reproducer, affected tests, and complete configured suite", "may_write_code": false, "may_approve": false},
+    {"id": "security_reviewer", "purpose": "Check secrets, dependencies, permissions, provenance, and abuse paths", "may_write_code": false, "may_approve": false},
+    {"id": "recovery_verifier", "purpose": "Verify rollback, restoration, containment, and monitoring", "may_write_code": false, "may_approve": false},
+    {"id": "owner_approver", "purpose": "Authorize merge or deployment after reviewing evidence", "may_write_code": false, "may_approve": true}
+  ],
+  "separation_rules": [
+    "patch_author cannot approve",
+    "high-impact repairs require adversarial and security review",
+    "resolution requires regression and recovery verification",
+    "AI roles cannot impersonate owner_approver"
+  ]
+}

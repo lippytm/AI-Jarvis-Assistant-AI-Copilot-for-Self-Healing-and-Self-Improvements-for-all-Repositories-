@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "control_families": [
+    {"id": "SEC-01", "name": "Attack surface inventory", "detects": ["unexpected services", "public endpoints", "dangerous workflows", "unused dependencies"], "prevents": ["unknown exposure"], "evidence": ["versioned asset list", "owner", "data classification"]},
+    {"id": "SEC-02", "name": "Trust boundaries and data flow", "detects": ["unvalidated crossings", "sensitive data propagation"], "prevents": ["implicit trust"], "evidence": ["data-flow diagram", "boundary validation tests"]},
+    {"id": "SEC-03", "name": "Least privilege", "detects": ["excess token scopes", "write permissions", "admin defaults"], "prevents": ["unnecessary blast radius"], "evidence": ["permission diff", "access review"]},
+    {"id": "SEC-04", "name": "Secret protection", "detects": ["committed credentials", "private keys", "unsafe logs"], "prevents": ["credential persistence"], "evidence": ["secret scan", "redaction tests", "rotation owner"]},
+    {"id": "SEC-05", "name": "Dependency and build provenance", "detects": ["unlocked dependencies", "untrusted actions", "artifact drift"], "prevents": ["supply-chain substitution"], "evidence": ["lockfile", "artifact digest", "reviewed source"]},
+    {"id": "SEC-06", "name": "Input and output boundaries", "detects": ["injection paths", "unsafe deserialization", "unescaped output"], "prevents": ["untrusted data execution"], "evidence": ["negative tests", "schema validation"]},
+    {"id": "SEC-07", "name": "Security observability", "detects": ["authentication anomalies", "policy violations", "unexpected writes"], "prevents": ["silent compromise"], "evidence": ["auditable events", "alert routing", "retention policy"]},
+    {"id": "SEC-08", "name": "Containment", "detects": ["critical exposure requiring isolation"], "prevents": ["lateral spread"], "evidence": ["disable path", "revocation path", "isolation drill"]},
+    {"id": "SEC-09", "name": "Recovery", "detects": ["unrestorable state", "corrupt backups"], "prevents": ["permanent loss"], "evidence": ["restore test", "recovery objective", "rollback trigger"]},
+    {"id": "SEC-10", "name": "Independent verification", "detects": ["single-scanner blind spots", "false closure"], "prevents": ["uncorroborated resolution"], "evidence": ["second method", "review record"]}
+  ],
+  "closure_rule": "Critical and high findings remain open until evidence of remediation, regression protection, rollback readiness, and independent verification exists."
+}
