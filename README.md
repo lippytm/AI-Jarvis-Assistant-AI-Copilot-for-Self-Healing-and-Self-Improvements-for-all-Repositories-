@@ -27,4 +27,7 @@ merge → monitor → learn.
 - `catalog/detection-layers.json` defines eight failure-independent detection layers.
 - `scripts/fleet_triage.py` deduplicates, corroborates, and prioritizes fleet findings.
 - `docs/DETECTION_ARCHITECTURE.md` defines fast scanning, caching, containment, and degraded-mode transparency.
+- `catalog/security-controls.json` defines layered vulnerability-prevention and recovery controls.
+- `policy/incident-state-machine.json` makes security finding status changes auditable.
+- `docs/SECURITY_RESILIENCE.md` defines evidence required before high-impact findings close.
 - Development stays on review branches; `main` remains the approved baseline.
