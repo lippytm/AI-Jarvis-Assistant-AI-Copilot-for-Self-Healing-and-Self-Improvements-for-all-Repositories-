@@ -10,6 +10,8 @@ def validate(root: Path = Path(".")) -> dict[str, int]:
     layers = json.loads((root / "catalog/detection-layers.json").read_text(encoding="utf-8"))
     security = json.loads((root / "catalog/security-controls.json").read_text(encoding="utf-8"))
     incidents = json.loads((root / "policy/incident-state-machine.json").read_text(encoding="utf-8"))
+    antimalware = json.loads((root / "catalog/anti-malware-controls.json").read_text(encoding="utf-8"))
+    artifacts = json.loads((root / "policy/suspicious-artifact-state-machine.json").read_text(encoding="utf-8"))
     playbooks = catalog.get("playbooks")
     if not isinstance(playbooks, list) or not playbooks:
         raise ValueError("catalog requires at least one playbook")
@@ -39,13 +41,23 @@ def validate(root: Path = Path(".")) -> dict[str, int]:
         raise ValueError("incident lifecycle is missing required states")
     if incidents.get("production_authority") != "owner_approval_required":
         raise ValueError("incident production authority must require owner approval")
+    malware_controls = antimalware.get("controls")
+    if not isinstance(malware_controls, list) or len(malware_controls) < 15:
+        raise ValueError("anti-malware registry requires at least fifteen controls")
+    artifact_states = {item.get("state") for item in artifacts.get("states", [])}
+    if not {"untrusted", "scanning", "suspicious", "unknown", "resolved"}.issubset(artifact_states):
+        raise ValueError("suspicious artifact lifecycle is incomplete")
+    if artifacts.get("default_for_disagreement") != "unknown":
+        raise ValueError("scanner disagreement must default to unknown")
+    if artifacts.get("default_for_missing_evidence") != "untrusted":
+        raise ValueError("missing evidence must default to untrusted")
     if policy.get("default_mode") != "read_only":
         raise ValueError("default fleet mode must remain read_only")
     if policy.get("repair_mode") != "draft_pull_request_only":
         raise ValueError("repair mode must remain draft_pull_request_only")
     if not policy.get("require_owner_approval"):
         raise ValueError("owner approval must remain required")
-    return {"playbooks": len(playbooks), "detection_layers": len(detection_layers), "security_families": len(families), "incident_states": len(states), "prohibited_actions": len(policy.get("prohibited", []))}
+    return {"playbooks": len(playbooks), "detection_layers": len(detection_layers), "security_families": len(families), "incident_states": len(states), "anti_malware_controls": len(malware_controls), "artifact_states": len(artifact_states), "prohibited_actions": len(policy.get("prohibited", []))}
 
 
 if __name__ == "__main__":
