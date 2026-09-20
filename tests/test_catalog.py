@@ -26,6 +26,15 @@ class CatalogValidationTests(unittest.TestCase):
             (root / "catalog/detection-layers.json").write_text(json.dumps({
                 "layers": [{"id": f"L{number}"} for number in range(8)]
             }), encoding="utf-8")
+            (root / "catalog/security-controls.json").write_text(json.dumps({
+                "control_families": [{"id": f"SEC-{number}"} for number in range(10)]
+            }), encoding="utf-8")
+            (root / "policy/incident-state-machine.json").write_text(json.dumps({
+                "production_authority": "owner_approval_required",
+                "states": [{"state": state} for state in [
+                    "suspected", "investigating", "contained", "repairing", "verifying", "resolved"
+                ]]
+            }), encoding="utf-8")
             (root / "policy/fleet-policy.json").write_text(json.dumps({
                 "default_mode": "read_only",
                 "repair_mode": "draft_pull_request_only",
