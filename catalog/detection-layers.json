@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "layers": [
+    {"id": "L1", "name": "Contract", "purpose": "Validate schemas, interfaces, ownership, and intended behavior", "failure_independence": "design"},
+    {"id": "L2", "name": "Build", "purpose": "Compile, resolve dependencies, and verify reproducible artifacts", "failure_independence": "toolchain"},
+    {"id": "L3", "name": "Test", "purpose": "Exercise unit, integration, property, regression, and end-to-end behavior", "failure_independence": "behavior"},
+    {"id": "L4", "name": "Static", "purpose": "Detect type, lint, configuration, and code-quality risks without execution", "failure_independence": "analysis"},
+    {"id": "L5", "name": "Security", "purpose": "Scan secrets, dependencies, permissions, provenance, and abuse paths", "failure_independence": "adversarial"},
+    {"id": "L6", "name": "Runtime", "purpose": "Monitor health, latency, errors, resources, and external dependencies", "failure_independence": "operations"},
+    {"id": "L7", "name": "Recovery", "purpose": "Verify backup, rollback, restore, containment, and disaster procedures", "failure_independence": "resilience"},
+    {"id": "L8", "name": "Independent challenge", "purpose": "Use a second detector or reviewer to challenge important findings", "failure_independence": "corroboration"}
+  ],
+  "quality_rule": "Critical findings require containment; repairs require reproduction and tests; high-impact closure requires independent corroboration."
+}
