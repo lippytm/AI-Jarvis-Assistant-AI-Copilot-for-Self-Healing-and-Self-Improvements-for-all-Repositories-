@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "sources": [
+    {"id": "openssf-scorecard", "url": "https://openssf.org/projects/scorecard/"},
+    {"id": "openssf-fuzzing", "url": "https://openssf.org/technical-initiatives/fuzzing/"},
+    {"id": "github-attestations", "url": "https://docs.github.com/en/actions/concepts/security/artifact-attestations"},
+    {"id": "slsa-provenance", "url": "https://slsa.dev/spec/v1.2/build-provenance"},
+    {"id": "nist-ir-8397", "url": "https://csrc.nist.gov/pubs/ir/8397/final"},
+    {"id": "owasp-sbom", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Dependency_Graph_SBOM_Cheat_Sheet.html"}
+  ],
+  "enhancements": [
+    {"id": "RND-01", "name": "Repository security posture scoring", "phase": "pilot", "evidence": "Versioned score and individual check results", "gate": "Scores inform review and never authorize changes."},
+    {"id": "RND-02", "name": "Continuous fuzzing", "phase": "pilot", "evidence": "Reproducer corpus, crash signature, coverage delta", "gate": "Sandbox only; no production targets or private data."},
+    {"id": "RND-03", "name": "Property and invariant testing", "phase": "pilot", "evidence": "Declared invariant and shrinking counterexample", "gate": "Repository owner accepts invariant definition."},
+    {"id": "RND-04", "name": "Mutation testing", "phase": "research", "evidence": "Mutation score and surviving mutations", "gate": "Time budget and language support confirmed."},
+    {"id": "RND-05", "name": "SBOM per release", "phase": "pilot", "evidence": "SPDX or CycloneDX document bound to release digest", "gate": "Privacy review before publishing internal metadata."},
+    {"id": "RND-06", "name": "Artifact attestations", "phase": "pilot", "evidence": "Verified provenance linked to workflow and commit", "gate": "Verification policy exists; signing alone is insufficient."},
+    {"id": "RND-07", "name": "SLSA maturity assessment", "phase": "research", "evidence": "Gap analysis by build requirement", "gate": "No certification claim without independent validation."},
+    {"id": "RND-08", "name": "Dependency reachability and VEX", "phase": "research", "evidence": "Component, path, runtime exposure, and exploitability rationale", "gate": "Unknown exploitability remains open."},
+    {"id": "RND-09", "name": "Chaos and recovery drills", "phase": "pilot", "evidence": "Hypothesis, blast radius, recovery time, rollback result", "gate": "Disposable or isolated environment only."},
+    {"id": "RND-10", "name": "Canary and error-budget policy", "phase": "pilot", "evidence": "Service indicators, budget, stop and promotion rules", "gate": "No automatic promotion without policy approval."},
+    {"id": "RND-11", "name": "Detector quality benchmarking", "phase": "pilot", "evidence": "Precision, recall proxy, false-positive rate, runtime, cost", "gate": "Test corpus excludes live malware and private production data."},
+    {"id": "RND-12", "name": "Playbook effectiveness and retirement", "phase": "pilot", "evidence": "Repair success, recurrence, regression, and cost history", "gate": "Failed results retained; stale playbooks are deprecated."}
+  ]
+}
