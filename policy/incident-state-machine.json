@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "states": [
+    {"state": "suspected", "allowed": ["triage", "preserve_evidence"], "next": ["investigating", "false_positive"]},
+    {"state": "investigating", "allowed": ["read_only_diagnostics", "sandbox_reproduction"], "next": ["contained", "false_positive", "accepted_risk"]},
+    {"state": "contained", "allowed": ["disable_exposure", "revoke_affected_access", "prepare_repair"], "next": ["repairing"]},
+    {"state": "repairing", "allowed": ["isolated_patch", "regression_tests", "rollback_test"], "next": ["verifying", "contained"]},
+    {"state": "verifying", "allowed": ["independent_scan", "owner_review"], "next": ["resolved", "repairing"]},
+    {"state": "resolved", "allowed": ["monitor", "document", "update_playbook"], "next": ["reopened"]},
+    {"state": "false_positive", "allowed": ["record_evidence", "tune_detector"], "next": ["reopened"]},
+    {"state": "accepted_risk", "allowed": ["record_owner", "record_expiry", "monitor"], "next": ["reopened"]}
+  ],
+  "production_authority": "owner_approval_required"
+}
