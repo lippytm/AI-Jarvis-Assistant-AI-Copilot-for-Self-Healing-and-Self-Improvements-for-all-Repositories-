@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Anti-bug patch input",
+  "type": "object",
+  "required": ["repository", "finding_id", "summary", "reproducer", "suspected_files"],
+  "properties": {
+    "repository": {"type": "string", "minLength": 1},
+    "finding_id": {"type": "string", "minLength": 1},
+    "summary": {"type": "string", "minLength": 1},
+    "reproducer": {"type": "string", "minLength": 1},
+    "suspected_files": {"type": "array", "maxItems": 20, "items": {"type": "string"}},
+    "hypothesis": {"type": "string"},
+    "rollback": {"type": "string"},
+    "production_write_required": {"type": "boolean", "const": false}
+  }
+}
