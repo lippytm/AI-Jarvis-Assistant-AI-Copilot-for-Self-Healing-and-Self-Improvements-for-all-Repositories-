@@ -7,6 +7,7 @@ from pathlib import Path
 def validate(root: Path = Path(".")) -> dict[str, int]:
     catalog = json.loads((root / "catalog/diagnostic-playbooks.json").read_text(encoding="utf-8"))
     policy = json.loads((root / "policy/fleet-policy.json").read_text(encoding="utf-8"))
+    layers = json.loads((root / "catalog/detection-layers.json").read_text(encoding="utf-8"))
     playbooks = catalog.get("playbooks")
     if not isinstance(playbooks, list) or not playbooks:
         raise ValueError("catalog requires at least one playbook")
@@ -20,13 +21,19 @@ def validate(root: Path = Path(".")) -> dict[str, int]:
             raise ValueError(f"{item['id']} requires diagnostics")
         if not item.get("repair_gate"):
             raise ValueError(f"{item['id']} requires repair_gate")
+    detection_layers = layers.get("layers")
+    if not isinstance(detection_layers, list) or len(detection_layers) < 8:
+        raise ValueError("defense-in-depth registry requires at least eight layers")
+    layer_ids = [item.get("id") for item in detection_layers]
+    if len(layer_ids) != len(set(layer_ids)):
+        raise ValueError("detection layer IDs must be unique")
     if policy.get("default_mode") != "read_only":
         raise ValueError("default fleet mode must remain read_only")
     if policy.get("repair_mode") != "draft_pull_request_only":
         raise ValueError("repair mode must remain draft_pull_request_only")
     if not policy.get("require_owner_approval"):
         raise ValueError("owner approval must remain required")
-    return {"playbooks": len(playbooks), "prohibited_actions": len(policy.get("prohibited", []))}
+    return {"playbooks": len(playbooks), "detection_layers": len(detection_layers), "prohibited_actions": len(policy.get("prohibited", []))}
 
 
 if __name__ == "__main__":
