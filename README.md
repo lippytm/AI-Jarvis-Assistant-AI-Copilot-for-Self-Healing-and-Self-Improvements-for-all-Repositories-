@@ -43,4 +43,19 @@ merge → monitor → learn.
 - `scripts/patch_plan.py` converts reproduced defects into bounded draft-PR repair plans.
 - `schemas/patch-input.schema.json` limits patch scope and forbids production-write requirements.
 - `docs/ANTI_BUG_PATCHES.md` defines evidence-driven patch construction and regression protection.
+- `catalog/patcher-roles.json` separates reproduction, diagnosis, patching, review, verification, recovery, and approval.
+- `scripts/fleet_cli.py` exposes the unified `jarvis-fleet` application interface.
+- `scripts/readiness.py` verifies that required policies, catalogs, schemas, and separation rules are present.
+- `docs/APPLICATION_INTERFACE.md` documents installation, commands, and authorization boundaries.
 - Development stays on review branches; `main` remains the approved baseline.
+
+## Application commands
+
+```bash
+python -m pip install -e .
+jarvis-fleet validate
+jarvis-fleet readiness
+jarvis-fleet triage findings.json
+jarvis-fleet plan-patch issue.json
+jarvis-fleet prove-resolution record.json
+```
