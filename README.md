@@ -37,4 +37,7 @@ merge → monitor → learn.
 - `policy/experiment-policy.json` prevents unbounded or production security experiments.
 - `scripts/coverage_gap.py` reports which R&D controls still lack evidence.
 - `docs/SECURITY_RND.md` defines the governed research and promotion process.
+- `scripts/resolution_evidence.py` generates tamper-evident JSON and human-readable repair proof.
+- `schemas/resolution-evidence.schema.json` standardizes before/after reproduction, tests, rollback, monitoring, and approval.
+- `docs/TRANSPARENCY_EVIDENCE.md` defines what may and may not be claimed after a fix.
 - Development stays on review branches; `main` remains the approved baseline.
