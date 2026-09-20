@@ -6,12 +6,6 @@ from pathlib import Path
 
 def validate(root: Path = Path(".")) -> dict[str, int]:
     catalog = json.loads((root / "catalog/diagnostic-playbooks.json").read_text(encoding="utf-8"))
-    policy = json.loads((root / "policy/fleet-policy.json").read_text(encoding="utf-8"))
-    layers = json.loads((root / "catalog/detection-layers.json").read_text(encoding="utf-8"))
-    security = json.loads((root / "catalog/security-controls.json").read_text(encoding="utf-8"))
-    incidents = json.loads((root / "policy/incident-state-machine.json").read_text(encoding="utf-8"))
-    antimalware = json.loads((root / "catalog/anti-malware-controls.json").read_text(encoding="utf-8"))
-    artifacts = json.loads((root / "policy/suspicious-artifact-state-machine.json").read_text(encoding="utf-8"))
     playbooks = catalog.get("playbooks")
     if not isinstance(playbooks, list) or not playbooks:
         raise ValueError("catalog requires at least one playbook")
@@ -25,6 +19,12 @@ def validate(root: Path = Path(".")) -> dict[str, int]:
             raise ValueError(f"{item['id']} requires diagnostics")
         if not item.get("repair_gate"):
             raise ValueError(f"{item['id']} requires repair_gate")
+    policy = json.loads((root / "policy/fleet-policy.json").read_text(encoding="utf-8"))
+    layers = json.loads((root / "catalog/detection-layers.json").read_text(encoding="utf-8"))
+    security = json.loads((root / "catalog/security-controls.json").read_text(encoding="utf-8"))
+    incidents = json.loads((root / "policy/incident-state-machine.json").read_text(encoding="utf-8"))
+    antimalware = json.loads((root / "catalog/anti-malware-controls.json").read_text(encoding="utf-8"))
+    artifacts = json.loads((root / "policy/suspicious-artifact-state-machine.json").read_text(encoding="utf-8"))
     detection_layers = layers.get("layers")
     if not isinstance(detection_layers, list) or len(detection_layers) < 8:
         raise ValueError("defense-in-depth registry requires at least eight layers")
