@@ -40,4 +40,7 @@ merge → monitor → learn.
 - `scripts/resolution_evidence.py` generates tamper-evident JSON and human-readable repair proof.
 - `schemas/resolution-evidence.schema.json` standardizes before/after reproduction, tests, rollback, monitoring, and approval.
 - `docs/TRANSPARENCY_EVIDENCE.md` defines what may and may not be claimed after a fix.
+- `scripts/patch_plan.py` converts reproduced defects into bounded draft-PR repair plans.
+- `schemas/patch-input.schema.json` limits patch scope and forbids production-write requirements.
+- `docs/ANTI_BUG_PATCHES.md` defines evidence-driven patch construction and regression protection.
 - Development stays on review branches; `main` remains the approved baseline.
