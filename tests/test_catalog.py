@@ -35,6 +35,16 @@ class CatalogValidationTests(unittest.TestCase):
                     "suspected", "investigating", "contained", "repairing", "verifying", "resolved"
                 ]]
             }), encoding="utf-8")
+            (root / "catalog/anti-malware-controls.json").write_text(json.dumps({
+                "controls": [{"id": f"AV-{number}"} for number in range(15)]
+            }), encoding="utf-8")
+            (root / "policy/suspicious-artifact-state-machine.json").write_text(json.dumps({
+                "default_for_disagreement": "unknown",
+                "default_for_missing_evidence": "untrusted",
+                "states": [{"state": state} for state in [
+                    "untrusted", "scanning", "suspicious", "unknown", "resolved"
+                ]]
+            }), encoding="utf-8")
             (root / "policy/fleet-policy.json").write_text(json.dumps({
                 "default_mode": "read_only",
                 "repair_mode": "draft_pull_request_only",
