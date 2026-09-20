@@ -24,4 +24,7 @@ merge → monitor → learn.
 - `policy/fleet-policy.json` defines fleet limits and approval boundaries.
 - `catalog/diagnostic-playbooks.json` maps repository evidence to diagnostic tools.
 - `docs/REPAIR_PROTOCOL.md` defines reproducibility, repair, validation, rollback, and learning.
+- `catalog/detection-layers.json` defines eight failure-independent detection layers.
+- `scripts/fleet_triage.py` deduplicates, corroborates, and prioritizes fleet findings.
+- `docs/DETECTION_ARCHITECTURE.md` defines fast scanning, caching, containment, and degraded-mode transparency.
 - Development stays on review branches; `main` remains the approved baseline.
