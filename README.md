@@ -33,4 +33,8 @@ merge → monitor → learn.
 - `catalog/anti-malware-controls.json` defines endpoint, repository, supply-chain, behavioral, containment, and recovery defenses.
 - `policy/suspicious-artifact-state-machine.json` keeps unknown files isolated until evidence supports a decision.
 - `docs/ANTI_MALWARE_DEFENSE.md` defines safe sample handling and ransomware resilience.
+- `catalog/rnd-enhancements.json` tracks advanced research for fuzzing, SBOMs, attestations, recovery drills, and detector quality.
+- `policy/experiment-policy.json` prevents unbounded or production security experiments.
+- `scripts/coverage_gap.py` reports which R&D controls still lack evidence.
+- `docs/SECURITY_RND.md` defines the governed research and promotion process.
 - Development stays on review branches; `main` remains the approved baseline.
